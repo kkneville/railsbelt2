@@ -1,16 +1,26 @@
-<h2><%= @user.firstname %> <%= @user.lastname %>'s Profile </h2>
+<h2>Your Profile </h2>
 
 
 <p> Name: <%= @user.firstname %> <% @user.lastname %> </p>
 <p> Email: <%= @user.email %> </p>
 
-<p><% if @user == current_user %>
-<%= link_to "Edit", edit_user_path(id: current_user.id) %>
-<% end %></p>
-
 <p>-----------------------------------------------<p>
 
-<h3> <%= @user.firstname %> <% @user.lastname %>'s Organizations </h3>
+<h3> Your Groups </h3>
 
+<% if @groups %>
+<% @groups.each do |group| %>
+
+<h3><%= group.name %></h3>
+<p><%= group.desc %></p>
+<form class="form" action="/groups/leave" method="post">
+	<input type="hidden" name="_method" value="delete">
+	<input type="hidden" name="authenticity_token" placeholder="<%= form_authenticity_token %>">
+	<input type="hidden" name="group_id" value='<%= group.id %>'>
+	<input type="submit" value="Leave Group">	
+</form>
+
+<% end %>
+<% end %>
 
 

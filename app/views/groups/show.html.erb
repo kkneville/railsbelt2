@@ -1,0 +1,41 @@
+
+
+<div class="row">
+
+<div class="col-sm-6">	
+
+<h3><%= @group.name %></h3>
+
+<p><%= @group.desc %></p>
+
+
+<h4>Created By: <% if @group.user.id == current_user.id %> <%= "You!" %>
+				<% else %><%= @group.user.firstname %> <%= @group.user.lastname %><% end %></h4>
+
+<% if @members.include? current_user %>
+<form class="form" action="/groups/leave" method="post">
+	<input type="hidden" name="_method" value="delete">
+	<input type="hidden" name="authenticity_token" placeholder="<%= form_authenticity_token %>">
+	<input type="hidden" name="group_id" value='<%= @group.id %>'>
+	<input type="submit" value="Leave Group">	
+</form>
+<% else %>
+<form class="form" action="/groups/join" method="post">
+	<input type="hidden" name="authenticity_token" placeholder="<%= form_authenticity_token %>">
+	<input type="hidden" name="group_id" value='<%= @group.id %>'>
+	<input type="submit" value="Join Group">	
+</form>
+<% end %>
+
+<h3>Members:</h3>
+
+<ul>
+<% if @members %>
+<% @members.each do |member| %>
+	<li><%= member.firstname %>	<%= member.lastname %></li>
+<% end %>
+<% end %>
+</ul>
+
+</div>
+</div>

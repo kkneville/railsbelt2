@@ -1,0 +1,47 @@
+<h1>Welcome <%= current_user.firstname %> <%= current_user.lastname %></h1>
+
+<div class="row">
+
+<div class="col-sm-4">	
+
+<h3>Here are groups you can join:</h3>
+
+
+<% if @groups %>
+<% @groups.each do |group| %>
+<h4><%= link_to "#{group.name}", group_path(:group_id => group.id)%>  </h4>
+<p>Members: <%= members_count(group.id) %> </p>
+<p><%= group.desc %></p>
+<% if group.user.id == current_user.id %>
+<p><%= link_to "Delete", delete_group_path(:group_id => group.id), :method => :delete %>
+<% end %> 
+<p>---------------------------------<p>
+<% end %>	
+<% end %>
+
+</div>
+
+<div class="col-sm-4">
+
+<h3>Add a New Group:</h3>
+
+<form class="form" action="add_group" method="post">
+	<input type="hidden" name="authenticity_token" placeholder="<%= form_authenticity_token %>">
+	<div class="row">
+		<p><input type="text" name="group[name]" placeholder="Group Name"></p>
+	</div>
+	<div class="row">
+		<p><input type="textarea" name="group[desc]" placeholder="Group Description"></p>
+	</div>
+	<div class="row">
+		<p><input type="submit" value="Submit"></p>
+	</div>
+</form>
+
+
+
+</div>
+
+</div>
+
+

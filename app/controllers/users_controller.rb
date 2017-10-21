@@ -3,9 +3,9 @@ class UsersController < ApplicationController
   end
 
   def new
-    if current_user
+    if current_user  
       return redirect_to index_path
-    end  
+    end 
   end
 
   def create
@@ -20,7 +20,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:user_id])
+    @user = current_user
+    @groups = @user.groups.all
     return render "/users/show.html.erb"
   end
 

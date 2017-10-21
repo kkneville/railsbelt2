@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   validates :firstname, :lastname, :email, presence: :true
   validates :email, uniqueness: :true, format: {with: email_regex}
   before_save :downcase_email
+  has_many :groups
+  has_many :memberships
+  has_many :groups, through: :memberships
 
   def downcase_email
   	self.email.downcase!

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'membership/new'
 
-  get 'membership/create'
+  get 'membership/create' 
 
   get 'membership/show'
 
@@ -11,21 +11,23 @@ Rails.application.routes.draw do
 
   get 'membership/update'
 
-  get 'membership/delete'
+  delete 'membership/delete' 
 
-  get 'group/index'
+  get 'index' => 'groups#index', as: 'index'
 
-  get 'group/new'
+  get 'groups/new'
 
-  get 'group/create'
+  post 'add_group' => 'groups#create', as: 'add_group'
 
-  get 'group/show'
+  get 'groups/show' => 'groups#show', as: 'group'
 
-  get 'group/edit'
+  get 'groups/join' => 'memberships#create', as: 'add_first_member'
 
-  get 'group/update'
+  post 'groups/join' => 'memberships#create', as: 'add_membership'
 
-  get 'group/delete'
+  delete 'groups/leave' => 'memberships#delete', as: 'delete_membership'
+
+  delete 'groups/delete' => 'groups#delete', as: 'delete_group'
 
   get 'sessions/index'
 
@@ -41,7 +43,7 @@ Rails.application.routes.draw do
 
   get 'logout' => 'sessions#destroy', as: 'logout'
 
-  get 'index' => 'users#index', as: 'index'
+  get 'users/index' => 'users#index' 
 
   get 'register' => 'users#new', as: 'register_page'
 

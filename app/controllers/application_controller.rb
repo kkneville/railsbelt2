@@ -9,4 +9,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  def members_count(group)
+  	group = Group.find(group)
+  	members = group.users
+  	members = members.select(:id).map(&:id).uniq
+  	members_count = members.length
+  end 
+
+  helper_method :members_count
+
 end
