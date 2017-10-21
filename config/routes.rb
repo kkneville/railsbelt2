@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  
+  root 'users#new'
+
   get 'membership/index'
 
   get 'membership/new'

@@ -13,9 +13,9 @@ class SessionsController < ApplicationController
           return redirect_to index_path
       end 
     else
-       flash[:errors] = ['Email and password do not match.']
-    end 
-    return redirect_to '/login'
+      flash[:errors] = ["Email and password do not match"]
+      return redirect_to '/login'
+    end  
   end
 
   def destroy
